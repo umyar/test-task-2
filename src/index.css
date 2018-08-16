@@ -1,0 +1,17 @@
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+#root {
+  border: solid yellow 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
