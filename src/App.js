@@ -14,7 +14,7 @@ class App extends Component {
 
         this.state = {
             modalIsOpen: false,
-            currentImg: 'https://cdn.fishki.net/upload/post/2017/03/19/2245758/tn/01-beautiful-white-cat-imagescar-wallpaper.jpg'
+            currentImg: photos[0]
         };
     }
 
@@ -30,11 +30,19 @@ class App extends Component {
         this.setState({modalIsOpen: false});
     }
 
+    goLeft = () => {
+        this.setState({currentImg: photos[2]})
+    }
+
+    goRight = () => {
+        this.setState({currentImg: photos[3]})
+    }
+
     render() {
         return (
             <div className="container">
                 <div className="left" onClick={this.goLeft}>
-                    левый
+                    <i className="fas fa-angle-left"/>
                 </div>
                 <div className="center">
                     <MainPhoto
@@ -44,7 +52,7 @@ class App extends Component {
                     <PhotoBar photos={photos}/>
                 </div>
                 <div className="right" onClick={this.goRight}>
-                    правый
+                    <i className="fas fa-angle-right"/>
                 </div>
                 {/*МОДАЛКА*/}
                 <Modal
@@ -55,12 +63,13 @@ class App extends Component {
                     overlayClassName="Overlay"
                     contentLabel="modal-window"
                     closeTimeoutMS={150}
-
                 >
-                    <img
-                        id="modal-img"
-                        src={this.state.currentImg}
-                        alt="выбранное изображение"/>
+                    <div className="container-in-modal">
+                        <img
+                            id="modal-img"
+                            src={this.state.currentImg}
+                            alt="выбранное изображение"/>
+                    </div>
                 </Modal>
             </div>
         );

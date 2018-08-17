@@ -19,13 +19,22 @@ class PhotoBar extends Component {
     render() {
         return (
             <div className="photo-bar-container">
-                <button className="bar-button"><i className="fas fa-arrow-circle-left"/></button>
-                <div className="bar-item-container">
+                <button
+                    className="bar-button"
+                    onClick={() => this.divElement.scrollLeft -= 100}
+                >
+                    <i className="fas fa-chevron-circle-left"/>
+                </button>
+                <div className="bar-item-container" ref={div => this.divElement = div}>
                     <ul>
                         {this.getPhotosFromArray()}
                     </ul>
                 </div>
-                <button className="bar-button"><i className="fas fa-arrow-circle-right"/></button>
+                <button
+                    className="bar-button"
+                    onClick={() => this.divElement.scrollLeft += 100}>
+                    <i className="fas fa-chevron-circle-right"/>
+                </button>
             </div>
         );
     }

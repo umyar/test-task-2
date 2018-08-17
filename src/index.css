@@ -9,9 +9,26 @@ body {
 }
 
 #root {
-  border: solid yellow 3px;
+  /*border: solid yellow 3px;*/
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 30px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: lightgrey;
+  border-radius: 30px;
 }
