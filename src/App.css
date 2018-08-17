@@ -3,38 +3,69 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  height: 80%;
-  width: 90%;
+  width: 95%;
   border: 2px blue solid;
 }
 
 .Modal {
   position: absolute;
-  /*height: 700px;
-  width: 1190px;*/
-  height: 70%;
-  width: 80%;
+  height: 700px;
+  width: 1190px;
   top: 50%;
   left: 50%;
   right: auto;
   bottom: auto;
   transform: translate(-50%, -50%);
+  transition: all .3s ease-in-out;
+  background-color: white;
+  border: solid black 1px;
+  display: flex;
+  justify-content: center;
 }
 
-.left {
+.ReactModal__Content {
+  opacity: 0;
+
+  background-size: cover;
+}
+
+.ReactModal__Content--after-open {
+  opacity: 1;
+  transition: opacity 150ms;
+}
+
+.ReactModal__Content--before-close {
+  opacity: 0;
+}
+
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  background-size: 100%;
+}
+
+.left, .right {
   border: solid black 2px;
   width: 25%;
-  height: 50%;
+  height: 300px;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .center {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   border: solid black 2px;
-  width: 40%;
-  height: 90%;
+  width: 45%;
 }
 
-.right {
-  border: solid black 2px;
-  width: 25%;
-  height: 50%;
+#modal-img {
+  height: 100%;
 }

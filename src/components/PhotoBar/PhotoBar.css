@@ -1,0 +1,60 @@
+.photo-bar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 150px;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0;
+}
+
+.bar-item-container {
+    overflow: hidden;
+}
+
+ul li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 5px;
+}
+
+ul li:first-child {
+    margin-left: 10px;
+}
+
+ul li:last-child {
+    margin-right: 10px;
+}
+
+.bar-item {
+    object-fit: cover;
+    height: 100px;
+    width: 100px;
+    transition: opacity .3s ease-in-out;
+    opacity: 0.6;
+}
+
+.bar-item:hover {
+    opacity: 1;
+}
+
+.bar-button {
+    width: 70px;
+    height: 70px;
+    margin: 10px 10px;
+    border: none;
+    background: none;
+    font-size: 50px;
+    opacity: 0.7;
+    transition: opacity .3s ease-in-out;
+}
+
+.bar-button:hover {
+    opacity: 1;
+}

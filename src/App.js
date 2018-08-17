@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Modal from 'react-modal';
 import './App.css';
 import MainPhoto from "./components/center/MainPhoto";
+import PhotoBar from "./components/PhotoBar/PhotoBar";
+import photos from './photos'
 
 // Make sure to bind modal to your appElement (http://reactcommunity.org/react-modal/accessibility/)
 Modal.setAppElement('#root');
@@ -21,8 +23,6 @@ class App extends Component {
     }
 
     afterOpenModal = () => {
-        // references are now sync'd and can be accessed.
-        //this.subtitle.style.color = '#f00';
         console.log('opened')
     }
 
@@ -41,6 +41,7 @@ class App extends Component {
                         currentImg={this.state.currentImg}
                         openModal={this.openModal}
                     />
+                    <PhotoBar photos={photos}/>
                 </div>
                 <div className="right" onClick={this.goRight}>
                     правый
@@ -51,11 +52,15 @@ class App extends Component {
                     onAfterOpen={this.afterOpenModal}
                     onRequestClose={this.closeModal}
                     className="Modal"
+                    overlayClassName="Overlay"
                     contentLabel="modal-window"
+                    closeTimeoutMS={150}
+
                 >
-                    <h2>Hello</h2>
-                    <img src={this.state.currentImg} alt="выбранное изображение"/>
-                    <button onClick={this.closeModal}>close</button>
+                    <img
+                        id="modal-img"
+                        src={this.state.currentImg}
+                        alt="выбранное изображение"/>
                 </Modal>
             </div>
         );
@@ -63,3 +68,14 @@ class App extends Component {
 }
 
 export default App;
+
+
+
+/*
+document.querySelector('.bar-button').addEventListener('click', () => {
+    document.querySelector('ul').scrollLeft -= 100;
+})
+document.querySelectorAll('.bar-button')[1].addEventListener('click', () => {
+    document.querySelector('ul').scrollLeft += 100;
+})
+*/

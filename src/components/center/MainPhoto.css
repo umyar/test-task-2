@@ -1,3 +1,11 @@
 #main-photo {
-    width: 100%;
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+}
+
+.main-photo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
