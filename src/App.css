@@ -1,9 +1,33 @@
 .container {
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 95%;
+  /*border: 2px blue solid;*/
+}
+
+.app-bar {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.app-bar button {
+  height: 30px;
+  width: 100px;
+  background-color: lightblue;
+  border-radius: 20px;
+  outline: none;
+}
+
+.content {
+  display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  width: 95%;
+  width: 100%;
   /*border: 2px blue solid;*/
 }
 
@@ -80,12 +104,12 @@
   opacity: 0.2;
 }
 
-.center {
+.main {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   /*border: solid black 2px;*/
-  width: 45%;
+  width: 800px;
 }
 
 #modal-img {

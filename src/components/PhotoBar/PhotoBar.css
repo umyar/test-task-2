@@ -9,14 +9,14 @@ ul {
     list-style: none;
     display: flex;
     justify-content: flex-start;
-    width: 100%;
     padding: 0;
-    transform: translateX(33%);
+    transform: translateX(200px);
 }
 
 .bar-item-container {
     overflow-x: scroll;
     transition: all .3s ease-in-out;
+    width: 500px;
 }
 
 ul li {

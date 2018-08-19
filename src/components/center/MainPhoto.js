@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 
 import './MainPhoto.css'
 
@@ -17,8 +16,5 @@ class MainPhoto extends Component {
         );
     }
 }
-
-MainPhoto.propTypes = {};
-MainPhoto.defaultProps = {};
 
 export default MainPhoto;
