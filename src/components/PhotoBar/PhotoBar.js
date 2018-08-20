@@ -10,18 +10,31 @@ class PhotoBar extends Component {
         this.props.getPhotos(this.props.howManyPhotos)
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.imgIndex === 5) {
+            this.ulElement.scrollLeft += 100
+        }
+    }
+
+
     render() {
+        const {photosLength, imgIndex} = this.props;
+
         return (
             <div className="photo-bar-container">
-                <button className="bar-button" onClick={() => this.divElement.scrollLeft -= 100}>
+                <button className="bar-button"
+                        onClick={() => this.ulElement.scrollLeft -= 100}
+                        disabled={imgIndex === 0}>
                     <i className="fas fa-chevron-circle-left"/>
                 </button>
-                <div className="bar-item-container" ref={div => this.divElement = div}>
-                    <ul>
+                <div className="bar-item-container" >
+                    <ul ref={ul => this.ulElement = ul} onScroll={console.log('меня скролят')}>
                         {this.getPhotosFromArray()}
                     </ul>
                 </div>
-                <button className="bar-button" onClick={() => this.divElement.scrollLeft += 100}>
+                <button className="bar-button"
+                        onClick={() => this.ulElement.scrollLeft += 100}
+                        disabled={imgIndex === (photosLength - 1)}>
                     <i className="fas fa-chevron-circle-right"/>
                 </button>
             </div>
@@ -32,7 +45,7 @@ class PhotoBar extends Component {
         const {photos} = this.props;
         return photos && photos.map((i, index) =>
             <li key={index}>
-                <img className="bar-item" src={i} alt="preview" onClick={this.props.selectImg}/>
+                <img id={index} className="bar-item" src={i} alt="preview" onClick={this.props.selectImg}/>
             </li>)
     };
 

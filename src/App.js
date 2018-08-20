@@ -5,7 +5,7 @@ import MainPhoto from "./components/center/MainPhoto";
 import PhotoBar from "./components/PhotoBar/PhotoBar";
 import {connect} from 'react-redux'
 
-import {getToken} from './actions/tokenAction'
+import {setToken} from './actions/tokenAction'
 
 Modal.setAppElement('#root');
 
@@ -16,7 +16,8 @@ class App extends Component {
         this.state = {
             modalIsOpen: false,
             currentImg: null,
-            imgIndex: 0
+            imgIndex: 0,
+            token: null
         };
     }
 
@@ -26,15 +27,31 @@ class App extends Component {
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.photos) {
-            this.setState({currentImg: nextProps.photos[0]})
+            this.setState({currentImg: nextProps.photos[this.state.imgIndex]})
         }
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.imgIndex !== prevState.imgIndex) {
+            this.setState({currentImg: this.props.photos[this.state.imgIndex]})
+        }
+    }
+
+
     render() {
+        const {isLoading, photos, setToken} = this.props
+        const {currentImg, imgIndex, modalIsOpen, token} = this.state
+
         return (
             <div className="container">
                 <div className="app-bar">
-                    <button>Войти</button>
+                    <form onSubmit={setToken(token)}>
+                        <input type="text"
+                               placeholder="введите сюда свой токен"
+                               value={token}
+                               onChange={this.handleChange}/>
+                        <button>Сохранить токен</button>
+                    </form>
                 </div>
                 <div className="content">
                     <div className="left" onClick={this.goLeft}>
@@ -42,13 +59,15 @@ class App extends Component {
                     </div>
                     <div className="main">
                         <MainPhoto
-                            isLoading={this.props.isLoading}
-                            currentImg={this.state.currentImg}
+                            isLoading={isLoading}
+                            currentImg={currentImg}
                             openModal={this.openModal}
                         />
                         <PhotoBar
+                            photosLength={photos.length}
+                            imgIndex={imgIndex}
                             selectImg={this.selectImage}
-                            howManyPhotos={61}
+                            howManyPhotos={23}
                         />
                     </div>
                     <div className="right" onClick={this.goRight}>
@@ -57,7 +76,7 @@ class App extends Component {
                 </div>
                 {/*МОДАЛКА*/}
                 <Modal
-                    isOpen={this.state.modalIsOpen}
+                    isOpen={modalIsOpen}
                     onAfterOpen={this.afterOpenModal}
                     onRequestClose={this.closeModal}
                     className="Modal"
@@ -68,7 +87,7 @@ class App extends Component {
                     <div className="container-in-modal">
                         <img
                             id="modal-img"
-                            src={this.state.currentImg}
+                            src={currentImg}
                             alt="выбранное изображение"/>
                     </div>
                 </Modal>
@@ -76,8 +95,15 @@ class App extends Component {
         );
     }
 
+    handleChange = (e) => {
+        this.setState({value: e.target.value});
+    }
+
     selectImage = (e) => {
-        this.setState({currentImg: e.target.src});
+        this.setState({
+            currentImg: e.target.src,
+            imgIndex: +e.target.id
+        });
     }
 
     openModal = () => {
@@ -94,13 +120,13 @@ class App extends Component {
 
     goLeft = () => {
         this.setState(prevState => ({
-            imgIndex: (prevState.imgIndex - 1) >= 0? prevState.imgIndex - 1 : prevState.imgIndex //todo проверка на длину массива
+            imgIndex: (prevState.imgIndex - 1) >= 0? prevState.imgIndex - 1 : prevState.imgIndex,
         }))
     }
 
     goRight = () => {
         this.setState(prevState => ({
-            imgIndex: (prevState.imgIndex + 1) < this.props.photos.length? prevState.imgIndex + 1 : prevState.imgIndex
+            imgIndex: (prevState.imgIndex + 1) < this.props.photos.length? prevState.imgIndex + 1 : prevState.imgIndex,
         }))
     }
 }
@@ -115,8 +141,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getToken: () => {
-            dispatch(getToken())
+        setToken: (token) => {
+            dispatch(setToken(token))
         }
     }
 };
@@ -124,10 +150,10 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 //token
-//d7e17e7db3c5dc32bc774fe63c2577a3accffdda2864231ce51e522bf55c08a08c15ec7a715fefa440535
+//ed141a37b1bdc5ea9e77a8a88e64bb34a71fa8137fae5e96f7d5765d8f231e9d728212a4a2042c0e817ae
 
 //запрос за token для приложения 'photos'
-//https://oauth.vk.com/authorize?client_id=6665721&display=page&redirect_uri=https://oauth.vk.com/blank.html&scope=friends&response_type=token&v=5.80
+//https://oauth.vk.com/authorize?client_id=6665721&display=page&redirect_uri=https://oauth.vk.com/blank.html&scope=wall,friends&response_type=token&v=5.80
 
 //формат запроса
 //https://api.vk.com/method/METHOD_NAME?PARAMETERS&access_token=ACCESS_TOKEN&v=V

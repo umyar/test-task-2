@@ -3,7 +3,7 @@ import {LOAD_PHOTOS_START, LOAD_PHOTOS_SUCCESS, LOAD_PHOTOS_FAIL} from '../actio
 const initialState = {
     isLoading: false,
     photos: [],
-    currentPhoto: null
+    currentImg: null
 }
 
 export default (state = initialState, action) => {

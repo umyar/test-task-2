@@ -10,11 +10,15 @@ ul {
     display: flex;
     justify-content: flex-start;
     padding: 0;
+    width: 100%;
+    overflow-x: scroll;
+    height: 120px;
+    transition: all .3s ease-in-out;
     /*transform: translateX(200px);*/
 }
 
 .bar-item-container {
-    overflow-x: scroll;
+    /*overflow-x: scroll;*/
     transition: all .3s ease-in-out;
     width: 500px;
 }
@@ -43,9 +47,9 @@ ul li {
     margin: 10px 10px;
     border: none;
     background: none;
-    font-size: 50px;
-    opacity: 0.6;
-    transition: opacity .3s ease-in-out;
+    font-size: 60px;
+    opacity: 0.7;
+    transition: all .3s ease-in-out;
     outline: none;
 }
 

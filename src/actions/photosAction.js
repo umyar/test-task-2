@@ -8,7 +8,7 @@ export function getPhotos(howMany) {
         //https://api.vk.com/method/METHOD_NAME?PARAMETERS&access_token=ACCESS_TOKEN&v=V
         axios({
             method: 'get',
-            url: `https://api.vk.com/method/newsfeed.get?filters=wall_photo&count=${howMany}&end_time=1516838400&access_token=c3951e080b7959f017b3c2dde3452b8db017004da52222479d7113acf92956d0ed48d142b1bf61b0f4ca4&v=5.80`,
+            url: `https://api.vk.com/method/newsfeed.get?filters=wall_photo&count=${howMany}&end_time=1516838400&access_token=ed141a37b1bdc5ea9e77a8a88e64bb34a71fa8137fae5e96f7d5765d8f231e9d728212a4a2042c0e817ae&v=5.80`,
             dataType: 'JSONP'
         })
             .then(function (response) {
@@ -16,7 +16,7 @@ export function getPhotos(howMany) {
                     dispatch({ type: LOAD_PHOTOS_SUCCESS, payload: response.data.response.items });
                 }
 
-                else if (response.data.status === 'err') {
+                else {
                     dispatch({ type: LOAD_PHOTOS_FAIL, payload: 'Не удалось загрузить фото' });
                 }
             })

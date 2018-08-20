@@ -11,7 +11,7 @@ class MainPhoto extends Component {
                     <img
                     id="main-photo"
                     src={this.props.currentImg}
-                    alt="текущее изображение"
+                    alt="не удалось загрузить фото"
                     onClick={this.props.openModal}
                      />}
             </div>
