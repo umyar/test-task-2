@@ -21,9 +21,9 @@ class App extends Component {
         };
     }
 
-    componentDidMount() {
+    /*componentDidMount() {
         this.props.getToken()
-    }
+    }*/
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.photos) {
@@ -39,20 +39,11 @@ class App extends Component {
 
 
     render() {
-        const {isLoading, photos, setToken} = this.props
-        const {currentImg, imgIndex, modalIsOpen, token} = this.state
+        const {isLoading, photos} = this.props
+        const {currentImg, imgIndex, modalIsOpen} = this.state
 
         return (
             <div className="container">
-                <div className="app-bar">
-                    <form onSubmit={setToken(token)}>
-                        <input type="text"
-                               placeholder="введите сюда свой токен"
-                               value={token}
-                               onChange={this.handleChange}/>
-                        <button>Сохранить токен</button>
-                    </form>
-                </div>
                 <div className="content">
                     <div className="left" onClick={this.goLeft}>
                         <i className="fas fa-angle-left"/>
@@ -93,10 +84,6 @@ class App extends Component {
                 </Modal>
             </div>
         );
-    }
-
-    handleChange = (e) => {
-        this.setState({value: e.target.value});
     }
 
     selectImage = (e) => {
