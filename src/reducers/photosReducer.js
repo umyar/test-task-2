@@ -2,14 +2,19 @@ import {LOAD_PHOTOS_START, LOAD_PHOTOS_SUCCESS, LOAD_PHOTOS_FAIL} from '../actio
 
 const initialState = {
     isLoading: false,
-    photos: []
+    photos: [],
+    currentPhoto: null
 }
 
 export default (state = initialState, action) => {
     const { type, payload } = action;
 
     const takePhotosFromPayload = (payload) => {
-        return payload
+        const firstStep = (payload.map(i => i.photos.items)).map(i => i.map(i => i.sizes.pop()));
+        const secondStep = (firstStep.map(i => i.shift())).map(i => i.url);
+       /* console.log('firstStep', firstStep);
+        console.log('secondStep', secondStep);*/
+        return secondStep
     };
 
     switch (type) {

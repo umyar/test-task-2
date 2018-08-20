@@ -3,7 +3,9 @@ import Modal from 'react-modal';
 import './App.css';
 import MainPhoto from "./components/center/MainPhoto";
 import PhotoBar from "./components/PhotoBar/PhotoBar";
-import photos from './photos'
+import {connect} from 'react-redux'
+
+import {getToken} from './actions/tokenAction'
 
 Modal.setAppElement('#root');
 
@@ -13,9 +15,19 @@ class App extends Component {
 
         this.state = {
             modalIsOpen: false,
-            currentImg: photos[0],
+            currentImg: null,
             imgIndex: 0
         };
+    }
+
+    componentDidMount() {
+        this.props.getToken()
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.photos) {
+            this.setState({currentImg: nextProps.photos[0]})
+        }
     }
 
     render() {
@@ -30,13 +42,13 @@ class App extends Component {
                     </div>
                     <div className="main">
                         <MainPhoto
-                            currentImg={photos[this.state.imgIndex]}
+                            isLoading={this.props.isLoading}
+                            currentImg={this.state.currentImg}
                             openModal={this.openModal}
                         />
                         <PhotoBar
                             selectImg={this.selectImage}
-                            photos={photos}
-                            how={6}
+                            howManyPhotos={61}
                         />
                     </div>
                     <div className="right" onClick={this.goRight}>
@@ -56,7 +68,7 @@ class App extends Component {
                     <div className="container-in-modal">
                         <img
                             id="modal-img"
-                            src={photos[this.state.imgIndex]}
+                            src={this.state.currentImg}
                             alt="выбранное изображение"/>
                     </div>
                 </Modal>
@@ -88,20 +100,37 @@ class App extends Component {
 
     goRight = () => {
         this.setState(prevState => ({
-            imgIndex: (prevState.imgIndex + 1) < photos.length? prevState.imgIndex + 1 : prevState.imgIndex
+            imgIndex: (prevState.imgIndex + 1) < this.props.photos.length? prevState.imgIndex + 1 : prevState.imgIndex
         }))
     }
 }
 
-export default App;
+const mapStateToProps = state => {
+    return {
+        isLoading: state.isLoading,
+        photos: state.photos,
+        error: state.error
+    }
+};
 
-//da37b20af618f805635a8421c10dd662d94742d2443f4eb33e3bcaa0197ac3588e0dadc9fb333df3f3b5a
-//https://oauth.vk.com/blank.html#access_token=da37b20af618f805635a8421c10dd662d94742d2443f4eb33e3bcaa0197ac3588e0dadc9fb333df3f3b5a&expires_in=86400&user_id=37348941
-/*
-document.querySelector('.bar-button').addEventListener('click', () => {
-    document.querySelector('ul').scrollLeft -= 100;
-})
-document.querySelectorAll('.bar-button')[1].addEventListener('click', () => {
-    document.querySelector('ul').scrollLeft += 100;
-})
-*/
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getToken: () => {
+            dispatch(getToken())
+        }
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+//token
+//d7e17e7db3c5dc32bc774fe63c2577a3accffdda2864231ce51e522bf55c08a08c15ec7a715fefa440535
+
+//запрос за token для приложения 'photos'
+//https://oauth.vk.com/authorize?client_id=6665721&display=page&redirect_uri=https://oauth.vk.com/blank.html&scope=friends&response_type=token&v=5.80
+
+//формат запроса
+//https://api.vk.com/method/METHOD_NAME?PARAMETERS&access_token=ACCESS_TOKEN&v=V
+
+//chrome extension
+// https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=en

@@ -10,7 +10,7 @@ ul {
     display: flex;
     justify-content: flex-start;
     padding: 0;
-    transform: translateX(200px);
+    /*transform: translateX(200px);*/
 }
 
 .bar-item-container {

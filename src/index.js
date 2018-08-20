@@ -13,8 +13,6 @@ import photosReducer from './reducers/photosReducer'
 
 const store = createStore(photosReducer, composeWithDevTools(applyMiddleware(thunk)));
 
-window.store = store; //для проверки
-
 ReactDOM.render(
     <Provider store={store}>
         <App />

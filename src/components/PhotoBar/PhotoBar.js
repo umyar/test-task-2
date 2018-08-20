@@ -5,12 +5,9 @@ import {getPhotos} from "../../actions/photosAction"
 import './PhotoBar.css'
 
 class PhotoBar extends Component {
-    /*constructor(props) {
-        super(props)
-    }*/
 
     componentDidMount() {
-        this.props.getPhotos(this.props.how)
+        this.props.getPhotos(this.props.howManyPhotos)
     }
 
     render() {
@@ -35,7 +32,7 @@ class PhotoBar extends Component {
         const {photos} = this.props;
         return photos && photos.map((i, index) =>
             <li key={index}>
-                <img className="bar-item" src={i} alt="preview" onClick={() => console.log('click')}/>
+                <img className="bar-item" src={i} alt="preview" onClick={this.props.selectImg}/>
             </li>)
     };
 
@@ -43,9 +40,9 @@ class PhotoBar extends Component {
 
 const mapStateToProps = state => {
     return {
-        isLoading: state.photos.isLoading,
-        photos: state.photos.photos,
-        error: state.photos.error
+        isLoading: state.isLoading,
+        photos: state.photos,
+        error: state.error
     }
 };
 
