@@ -46,6 +46,13 @@ li.active {
     }
 }*/
 
+p.error-msg {
+    background-color: #ff4e22;
+    font-size: 20px;
+    color: white;
+    text-align: center;
+}
+
 .bar-item {
     object-fit: cover;
     height: 100px;

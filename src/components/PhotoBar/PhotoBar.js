@@ -37,23 +37,31 @@ class PhotoBar extends Component {
 
     render() {
         return (
+            this.props.error ? <p className="error-msg">{this.props.error}</p> :
             <div className="photo-bar-container">
-                <button className="bar-button"
-                        onClick={() => this.ulElement.scrollLeft += -100}>
+                <button className="bar-button" id="btn-left"
+                        onClick={() => this.ulElement.scrollLeft -= 100}>
                     <i className="fas fa-chevron-circle-left"/>
                 </button>
-                <div className="bar-item-container" >
-                    <ul ref={ul => this.ulElement = ul}
-                        id="viewport">
-                        {this.getPhotosFromArray()}
-                    </ul>
-                </div>
-                <button className="bar-button"
-                        onClick={() => this.ulElement.scrollLeft += 100}>
+                    <div className="bar-item-container">
+                        <ul ref={ul => this.ulElement = ul}
+                            id="viewport">
+                            {this.getPhotosFromArray()}
+                        </ul>
+                    </div>
+                <button className="bar-button" id="btn-right"
+                        onClick={() => this.scrollOrGetNextPhotos(100)}>
                     <i className="fas fa-chevron-circle-right"/>
                 </button>
             </div>
         );
+    }
+
+    //скроллит ленту изображений или подгружает новое фото, если в массиве менее 6 элементов (иначе скроллом не вызвать новое фото)
+    scrollOrGetNextPhotos = (scroll) => {
+        const {photosLength, getNextPhotos, next_from} = this.props;
+
+        photosLength < 6? setTimeout(() => getNextPhotos(next_from) , 350) : this.ulElement.scrollLeft += scroll
     }
 
     getPhotosFromArray = () => {

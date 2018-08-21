@@ -18,14 +18,6 @@ class App extends Component {
         };
     }
 
-   /* componentWillReceiveProps(nextProps) {
-        if (nextProps.photos) {
-            this.setState({
-                currentImg: nextProps.photos[this.state.imgIndex],
-            })
-        }
-    }*/
-
     componentDidUpdate(prevProps, prevState) {
         //сюда попадаем, когда меняется imgIndex: в handleClickImg, goLeft, goRight
         if (this.state.imgIndex !== prevState.imgIndex) {
@@ -61,7 +53,7 @@ class App extends Component {
                         photosLength={photos.length}
                         imgIndex={imgIndex}
                         selectImg={this.handleClickImg}
-                        howManyPhotos={6}
+                        howManyPhotos={4}
                     />
                 </div>
                 <div className="right" onClick={this.goRight}>

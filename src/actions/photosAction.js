@@ -2,7 +2,7 @@ import {LOAD_PHOTOS_START, LOAD_PHOTOS_SUCCESS, LOAD_PHOTOS_FAIL,
         LOAD_NEXT_PHOTOS_START, LOAD_NEXT_PHOTOS_SUCCESS, LOAD_NEXT_PHOTOS_FAIL} from "./constants"
 import axios from 'axios'
 
-const access_token = '5a27c1a50db258e805bb9585caaf63ebdf0af1dd2a920c738cab5b788c2429fd85ea030f42e132724c2e8';
+const access_token = '05128f130cd9214117bdfbdf2bb582c2464a463d5345c19fed3b60e72be5c7f607560eff03b5c266bee1f';
 
 export function getPhotos(howMany) {
     return (dispatch) => {
@@ -14,16 +14,22 @@ export function getPhotos(howMany) {
             dataType: 'JSONP'
         })
             .then(function (response) {
+                console.log(response)
                 if (response.status === 200) {
+                    if (response.data.error.error_code){
+                        console.log(response.data.error.error_code)
+                        dispatch({ type: LOAD_PHOTOS_FAIL, payload: response.data.error.error_msg });
+                    }
+                    console.log(response.data.response)
                     dispatch({ type: LOAD_PHOTOS_SUCCESS, payload: response.data.response });
                 }
 
                 else {
-                    dispatch({ type: LOAD_PHOTOS_FAIL, payload: 'Не удалось загрузить фото' });
+                    dispatch({ type: LOAD_PHOTOS_FAIL, payload: 'Невозможно распознать ответ от сервера' });
                 }
             })
             .catch(function () {
-                dispatch({ type: LOAD_PHOTOS_FAIL, payload: 'Сервер в данный момент недоступен' });
+                dispatch({ type: LOAD_PHOTOS_FAIL, payload: 'Сервер в данный момент не отвечает' });
             })
     }
 }
