@@ -14,18 +14,14 @@ export function getPhotos(howMany) {
             dataType: 'JSONP'
         })
             .then(function (response) {
-                console.log(response)
-                if (response.status === 200) {
-                    if (response.data.error.error_code){
-                        console.log(response.data.error.error_code)
-                        dispatch({ type: LOAD_PHOTOS_FAIL, payload: response.data.error.error_msg });
-                    }
-                    console.log(response.data.response)
+                if (response.data.response) {
+                    console.log(response.data.response);
                     dispatch({ type: LOAD_PHOTOS_SUCCESS, payload: response.data.response });
                 }
 
-                else {
-                    dispatch({ type: LOAD_PHOTOS_FAIL, payload: 'Невозможно распознать ответ от сервера' });
+                else if (response.data.error.error_code) {
+                    console.log(response.data.error.error_code);
+                    dispatch({ type: LOAD_PHOTOS_FAIL, payload: response.data.error.error_msg });
                 }
             })
             .catch(function () {
