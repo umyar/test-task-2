@@ -12,7 +12,7 @@ ul {
     padding: 0;
     width: 100%;
     overflow-x: scroll;
-    height: 120px;
+    height: 130px;
 }
 
 .bar-item-container {
@@ -28,6 +28,24 @@ ul li {
     transition: all .3s ease-in-out;
 }
 
+li.active {
+    animation-duration: 0.5s;
+    animation-name: slidein;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+
+}
+
+@keyframes slidein {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-10px);
+    }
+}
+
 .bar-item {
     object-fit: cover;
     height: 100px;
@@ -41,7 +59,6 @@ li:hover {
 li.active {
     opacity: 1;
     transform: translateY(-5px);
-    box-shadow: 0 0.4em 5px rgba(122,122,122,0.5);
 }
 
 .bar-button {

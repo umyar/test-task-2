@@ -33,7 +33,7 @@ class App extends Component {
         else if (this.props.photos.length !== prevProps.photos.length) {
             this.setState({
                 currentImg: this.props.photos[this.props.photos.length - 3],
-                imgIndex: this.props.photos.length - 3
+                /*imgIndex: this.props.photos.length - 3*/
             })
         }
     }
