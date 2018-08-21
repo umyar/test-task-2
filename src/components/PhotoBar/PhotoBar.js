@@ -6,6 +6,7 @@ import './PhotoBar.css'
 
 class PhotoBar extends Component {
 
+    //компонент смонтировался, пора вешать обработчик на скролл, который будет тригерить запрос за новой фото
     componentDidMount() {
         this.props.getPhotos(this.props.howManyPhotos);
         window.document.getElementById('viewport').addEventListener('scroll', this.scrollHandler)
@@ -14,11 +15,14 @@ class PhotoBar extends Component {
     scrollHandler = (e) => {
         const {photosLength, getNextPhotos, next_from} = this.props;
         if ((photosLength - 5) * 100 === e.currentTarget.scrollLeft) {
-            getNextPhotos(next_from)
+            //Небольшой таймаут, потому что:
+            // К методам API ВКонтакте (за исключением методов из секций secure и ads) с ключом доступа пользователя можно обращаться не чаще 3 раз в секунду.
+            setTimeout(() => getNextPhotos(next_from) , 350);
         }
     };
 
-    componentDidUpdate(prevProps, prevState) {
+    //следим за изменением imgIndex в App компоненте, после чего скроллим наш "viewport" к текущей картинке
+    componentDidUpdate(prevProps) {
         if (this.props.imgIndex !== prevProps.imgIndex) {
             let {scrollLeft} = this.ulElement;
             const {imgIndex} = this.props;
@@ -30,19 +34,6 @@ class PhotoBar extends Component {
             }
         }
     }
-
-    /*componentWillReceiveProps(nextProps) {
-        if (nextProps.imgIndex !== undefined) {
-            let {scrollLeft} = this.ulElement;
-            const {imgIndex} = nextProps;
-
-            if (scrollLeft < (imgIndex - 4) * 100) {
-                this.ulElement.scrollLeft = (imgIndex - 4) * 100;
-            } else if (scrollLeft > imgIndex * 100) {
-                this.ulElement.scrollLeft = imgIndex * 100;
-            }
-        }
-    }*/
 
     render() {
         return (
@@ -89,8 +80,8 @@ const mapDispatchToProps = (dispatch) => {
         getPhotos: (howMany) => {
             dispatch(getPhotos(howMany))
         },
-        getNextPhotos: (howMany) => {
-            dispatch(getNextPhotos(howMany))
+        getNextPhotos: (next_from) => {
+            dispatch(getNextPhotos(next_from))
         }
     }
 };
