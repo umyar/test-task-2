@@ -18,23 +18,26 @@ class App extends Component {
         };
     }
 
-    componentWillReceiveProps(nextProps) {
+   /* componentWillReceiveProps(nextProps) {
         if (nextProps.photos) {
             this.setState({
                 currentImg: nextProps.photos[this.state.imgIndex],
             })
         }
-    }
+    }*/
 
     componentDidUpdate(prevProps, prevState) {
+        //сюда попадаем, когда меняется imgIndex: в handleClickImg, goLeft, goRight
         if (this.state.imgIndex !== prevState.imgIndex) {
             this.setState({currentImg: this.props.photos[this.state.imgIndex]})
+            console.log('сюда попадаем, когда меняется imgIndex: в handleClickImg, goLeft, goRight')
         }
+        //сюда попадаем, когда обновляется массив фотографий
         else if (this.props.photos.length !== prevProps.photos.length) {
             this.setState({
-                currentImg: this.props.photos[this.props.photos.length - 3],
-                /*imgIndex: this.props.photos.length - 3*/
+                currentImg: this.props.photos[prevState.imgIndex]
             })
+            console.log('сюда попадаем, когда обновляется массив фотографий')
         }
     }
 
@@ -57,7 +60,7 @@ class App extends Component {
                     <PhotoBar
                         photosLength={photos.length}
                         imgIndex={imgIndex}
-                        selectImg={this.selectImage}
+                        selectImg={this.handleClickImg}
                         howManyPhotos={6}
                     />
                 </div>
@@ -85,7 +88,7 @@ class App extends Component {
         );
     }
 
-    selectImage = (e) => {
+    handleClickImg = (e) => {
         this.setState({
             currentImg: e.target.src,
             imgIndex: +e.target.id
@@ -105,12 +108,15 @@ class App extends Component {
     };
 
     goLeft = () => {
+        //Переход к предыдущему изображению путем изменения индекса текущего изображения в массиве.
         this.setState(prevState => ({
             imgIndex: (prevState.imgIndex - 1) >= 0? prevState.imgIndex - 1 : prevState.imgIndex,
         }))
     };
 
     goRight = () => {
+        //Переход к следующему изображению путем изменения индекса текущего изображения в массиве.
+        //Проверка на длину массива нужна, чтобы не увеличивать индекс в случае возникновения ошибки с постоянной подгрузкой.
         this.setState(prevState => ({
             imgIndex: (prevState.imgIndex + 1) < this.props.photos.length? prevState.imgIndex + 1 : prevState.imgIndex,
         }))
@@ -128,7 +134,7 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, null)(App);
 
 //token
-//ed141a37b1bdc5ea9e77a8a88e64bb34a71fa8137fae5e96f7d5765d8f231e9d728212a4a2042c0e817ae
+//e8fabb62d571f9ff6c4ce1be8ee40b69e377c9472c0ddc8880232077e3fdf07656031560087d6caaab956
 
 //запрос за token для приложения 'photos'
 //https://oauth.vk.com/authorize?client_id=6665721&display=page&redirect_uri=https://oauth.vk.com/blank.html&scope=wall,friends&response_type=token&v=5.80

@@ -5,7 +5,7 @@ const initialState = {
     isLoading: false,
     photos: [],
     next_from: null,
-    error: []
+    error: null
 }
 
 export default (state = initialState, action) => {

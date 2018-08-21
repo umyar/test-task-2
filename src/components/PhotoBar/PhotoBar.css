@@ -29,22 +29,22 @@ ul li {
 }
 
 li.active {
-    animation-duration: 0.5s;
+    transform: translateY(-10px);
+   /* animation-duration: 2s;
     animation-name: slidein;
     animation-iteration-count: infinite;
-    animation-direction: alternate;
-
+    animation-direction: alternate;*/
 }
 
-@keyframes slidein {
+/*@keyframes slidein {
     from {
         transform: translateY(0);
     }
 
     to {
-        transform: translateY(-10px);
+        transform: translateY(-5px);
     }
-}
+}*/
 
 .bar-item {
     object-fit: cover;

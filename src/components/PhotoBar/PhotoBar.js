@@ -18,7 +18,20 @@ class PhotoBar extends Component {
         }
     };
 
-    componentWillReceiveProps(nextProps) {
+    componentDidUpdate(prevProps, prevState) {
+        if (this.props.imgIndex !== prevProps.imgIndex) {
+            let {scrollLeft} = this.ulElement;
+            const {imgIndex} = this.props;
+
+            if (scrollLeft < (imgIndex - 4) * 100) {
+                this.ulElement.scrollLeft = (imgIndex - 4) * 100;
+            } else if (scrollLeft > imgIndex * 100) {
+                this.ulElement.scrollLeft = imgIndex * 100;
+            }
+        }
+    }
+
+    /*componentWillReceiveProps(nextProps) {
         if (nextProps.imgIndex !== undefined) {
             let {scrollLeft} = this.ulElement;
             const {imgIndex} = nextProps;
@@ -29,13 +42,13 @@ class PhotoBar extends Component {
                 this.ulElement.scrollLeft = imgIndex * 100;
             }
         }
-    }
+    }*/
 
     render() {
         return (
             <div className="photo-bar-container">
                 <button className="bar-button"
-                        onClick={() => this.ulElement.scrollLeft -= 100}>
+                        onClick={() => this.ulElement.scrollLeft += -100}>
                     <i className="fas fa-chevron-circle-left"/>
                 </button>
                 <div className="bar-item-container" >
