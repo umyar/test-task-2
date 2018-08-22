@@ -54,7 +54,7 @@ class App extends Component {
                         photosLength={photos.length}
                         imgIndex={imgIndex}
                         selectImg={this.handleClickImg}
-                        howManyPhotos={4}
+                        howManyPhotos={8}
                     />
                 </div>
                 <div className="right" onClick={this.goRight}>
@@ -127,17 +127,3 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, null)(App);
-
-//token
-//e8fabb62d571f9ff6c4ce1be8ee40b69e377c9472c0ddc8880232077e3fdf07656031560087d6caaab956
-
-//запрос за token для приложения 'photos'
-/*
-https://oauth.vk.com/authorize?client_id=6665721&display=page&redirect_uri=https://oauth.vk.com/blank.html&scope=wall,friends&response_type=token&v=5.80
- */
-
-//формат запроса
-//https://api.vk.com/method/METHOD_NAME?PARAMETERS&access_token=ACCESS_TOKEN&v=V
-
-//chrome extension
-// https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=en
