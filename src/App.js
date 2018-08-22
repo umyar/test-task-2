@@ -22,14 +22,12 @@ class App extends Component {
         //сюда попадаем, когда меняется imgIndex: в handleClickImg, goLeft, goRight
         if (this.state.imgIndex !== prevState.imgIndex) {
             this.setState({currentImg: this.props.photos[this.state.imgIndex]})
-            console.log('сюда попадаем, когда меняется imgIndex: в handleClickImg, goLeft, goRight')
         }
         //сюда попадаем, когда обновляется массив фотографий
         else if (this.props.photos.length !== prevProps.photos.length) {
             this.setState({
                 currentImg: this.props.photos[prevState.imgIndex]
             })
-            console.log('сюда попадаем, когда обновляется массив фотографий')
         }
     }
 

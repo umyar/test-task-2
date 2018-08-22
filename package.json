@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "axios-jsonp-pro": "^1.1.4",
+    "jsonp": "^0.2.1",
     "react": "^15.5.0",
     "react-dom": "^15.5.0",
     "react-modal": "^3.5.1",
