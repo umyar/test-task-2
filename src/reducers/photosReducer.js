@@ -34,19 +34,13 @@ export default (state = initialState, action) => {
             error: payload
         };
         //NEXT PHOTOS **********************************
-        case LOAD_NEXT_PHOTOS_START : return {
-            ...state,
-            isLoading: true
-        };
         case LOAD_NEXT_PHOTOS_SUCCESS : return {
             ...state,
-            isLoading: false,
             photos: [...state.photos, takePhotosFromPayload(payload.items)],
             next_from: payload.next_from
         };
         case LOAD_NEXT_PHOTOS_FAIL : return {
             ...state,
-            isLoading: false,
             error: payload
         };
 

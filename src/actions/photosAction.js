@@ -2,7 +2,7 @@ import {LOAD_PHOTOS_START, LOAD_PHOTOS_SUCCESS, LOAD_PHOTOS_FAIL,
         LOAD_NEXT_PHOTOS_START, LOAD_NEXT_PHOTOS_SUCCESS, LOAD_NEXT_PHOTOS_FAIL} from "./constants"
 import axios from 'axios'
 
-const access_token = '05128f130cd9214117bdfbdf2bb582c2464a463d5345c19fed3b60e72be5c7f607560eff03b5c266bee1f';
+const access_token = 'ad78ba07dce828f4821e48d57c99dbd0d6d19071137c692216e3484931d46de4980bb710d893f1f7c6c5b';
 
 export function getPhotos(howMany) {
     return (dispatch) => {

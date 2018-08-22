@@ -37,6 +37,9 @@ class App extends Component {
     render() {
         const {isLoading, photos} = this.props;
         const {currentImg, imgIndex, modalIsOpen} = this.state;
+        const blurStyle = {
+            backgroundImage: 'url(' + currentImg + ')',
+        };
 
         return (
             <div className="container">
@@ -70,6 +73,8 @@ class App extends Component {
                     closeTimeoutMS={150}
                 >
                     <div className="container-in-modal">
+                        <div className="blur"
+                            style={blurStyle}/>
                         <img
                             id="modal-img"
                             src={currentImg}
@@ -129,7 +134,9 @@ export default connect(mapStateToProps, null)(App);
 //e8fabb62d571f9ff6c4ce1be8ee40b69e377c9472c0ddc8880232077e3fdf07656031560087d6caaab956
 
 //запрос за token для приложения 'photos'
-//https://oauth.vk.com/authorize?client_id=6665721&display=page&redirect_uri=https://oauth.vk.com/blank.html&scope=wall,friends&response_type=token&v=5.80
+/*
+https://oauth.vk.com/authorize?client_id=6665721&display=page&redirect_uri=https://oauth.vk.com/blank.html&scope=wall,friends&response_type=token&v=5.80
+ */
 
 //формат запроса
 //https://api.vk.com/method/METHOD_NAME?PARAMETERS&access_token=ACCESS_TOKEN&v=V
