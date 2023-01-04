@@ -9,7 +9,7 @@
     "react-dom": "^15.5.0",
     "react-modal": "^3.5.1",
     "react-redux": "^5.0.7",
-    "react-scripts": "1.1.4",
+    "react-scripts": "5.0.1",
     "redux": "^3.7.2",
     "redux-devtools-extension": "^2.13.5",
     "redux-thunk": "^2.2.0"
